@@ -1,7 +1,5 @@
 # Malware Network Communication Analysis & Threat Detection
 
-> Đồ án 08 — UIT · 3 tuần · 4 thành viên
-
 Điều tra traffic mạng từ PCAP của máy nghi nhiễm malware, tái dựng hành vi C2/beaconing/exfiltration, xây dựng detection rules và đánh giá độ chính xác.
 
 ---
