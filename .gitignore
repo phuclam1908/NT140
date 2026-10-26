@@ -1,0 +1,38 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Dataset raw (dùng external storage)
+data/raw/**/*.pcap
+data/raw/**/*.pcapng
+data/raw/**/*.binetflow
+data/raw/**/*.biargus
+data/raw/**/*.cap
+data/raw/**/*.gz
+data/raw/**/*.zip
+!data/raw/checksums.sha256
+
+# Processed / generated
+data/processed/
+data/labeled/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
