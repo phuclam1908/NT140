@@ -90,7 +90,7 @@ cp .env.example .env
 
 ## Quy tắc làm việc
 
-- Không push thẳng lên `main` — mọi thay đổi qua Pull Request
+- Không push thẳng lên `main` - mọi thay đổi qua Pull Request
 - Không commit file `.env`, PCAP, binetflow
 - Finding ID format: `FND-NNN` · Evidence ID: `EVD-NNN` · IOC ID: `IOC-NNN`
 - Xem [`docs/evidence_standards.md`](docs/evidence_standards.md) và [`docs/contribution_guide.md`](docs/contribution_guide.md)
