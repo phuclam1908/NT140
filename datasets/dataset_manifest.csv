@@ -1,0 +1,2 @@
+﻿scenario,capture,file,size_bytes,sha256,source_url,downloaded_by,date
+S01,CTU-Malware-Capture-Botnet-42,botnet-capture-20110810-neris.pcap,58266506,b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36,https://mcfp.felk.cvut.cz/publicDatasets/CTU-Malware-Capture-Botnet-42/,HuyenThuong,11/12/2026
