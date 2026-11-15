@@ -1,0 +1,50 @@
+
+===================================================================
+Protocol Hierarchy Statistics
+Filter: 
+
+frame                                    frames:323154 bytes:53096018
+  eth                                    frames:323154 bytes:53096018
+    arp                                  frames:906 bytes:54360
+      prp                                frames:2 bytes:120
+    ip                                   frames:322248 bytes:53041658
+      udp                                frames:85865 bytes:9213281
+        nbns                             frames:296 bytes:27880
+        dns                              frames:84574 bytes:9104128
+        nbdgm                            frames:111 bytes:26172
+          smb                            frames:111 bytes:26172
+            mailslot                     frames:111 bytes:26172
+              browser                    frames:111 bytes:26172
+        ssdp                             frames:6 bytes:1050
+        pktc                             frames:857 bytes:51963
+          _ws.malformed                  frames:680 bytes:41063
+        sip                              frames:1 bytes:452
+        data                             frames:4 bytes:276
+        snmp                             frames:16 bytes:1360
+      tcp                                frames:235622 bytes:43756694
+        http                             frames:2676 bytes:2052091
+          data                           frames:8 bytes:20171
+          data-text-lines                frames:816 bytes:1080494
+          media                          frames:45 bytes:59579
+          urlencoded-form                frames:53 bytes:14993
+          xml                            frames:1 bytes:4623
+          image-gif                      frames:39 bytes:36067
+          image-jfif                     frames:7 bytes:21403
+        data                             frames:39356 bytes:8090404
+          _ws.malformed                  frames:79 bytes:4740
+        nbss                             frames:96 bytes:16842
+          smb                            frames:84 bytes:15726
+            smb_pipe                     frames:12 bytes:2730
+              lanman                     frames:12 bytes:2730
+        _ws.malformed                    frames:97 bytes:5820
+        tls                              frames:1873 bytes:2791845
+          tls                            frames:541 bytes:1285537
+        irc                              frames:61 bytes:20374
+        smtp                             frames:1716 bytes:349176
+          imf                            frames:81 bytes:7495
+        dcerpc                           frames:4 bytes:10436
+          data                           frames:4 bytes:10436
+        prp                              frames:4 bytes:240
+      igmp                               frames:4 bytes:240
+      icmp                               frames:757 bytes:71443
+===================================================================
