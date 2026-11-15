@@ -3,7 +3,7 @@
 .env.*
 !.env.example
 
-# Dataset raw (dùng external storage)
+# Dataset raw (dung external storage)
 data/raw/**/*.pcap
 data/raw/**/*.pcapng
 data/raw/**/*.binetflow
@@ -46,3 +46,8 @@ Thumbs.db
 *.zip
 *.exe
 AssembledFiles/
+
+# NT140 - generated outputs
+data/raw/
+data/processed/
+reports/**/generated/
