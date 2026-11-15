@@ -1,0 +1,3 @@
+zeek_uid,dst_ip,dst_port,uri_path,request_frame,response_frame,tcp_stream,mz_hex_prefix,http_content_type,http_content_length,zeek_fuid,note
+CKUYcz36QpcqpNvRi4,60.190.223.75,2012,/p/out/kp.exe,171,251,3,4d5a90000300000004000000ffff0000b8000000000000004000000000000000,application/octet-stream,55808,FcEd4y1UfNvlHok7h9,PCAP HTTP body prefix MZ observed by TShark; no execution proof
+CL9KnbLVkdBhZW9Pi,60.190.223.75,2012,/p/out/kp.exe,60845,60954,3265,4d5a90000300000004000000ffff0000b8000000000000004000000000000000,application/octet-stream,55808,FvQfdj2TWQsMk212d4,PCAP HTTP body prefix MZ observed by TShark; no execution proof

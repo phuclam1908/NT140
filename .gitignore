@@ -36,3 +36,19 @@ Thumbs.db
 
 # Logs
 *.log
+
+# NT140 - Local datasets and generated analysis outputs
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# Network captures and labeled flows
+*.pcap
+*.pcapng
+*.binetflow
+data/raw/
+data/processed/
+
+# Generated analysis outputs
+reports/**/generated/
