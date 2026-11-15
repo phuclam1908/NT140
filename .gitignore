@@ -36,3 +36,13 @@ Thumbs.db
 
 # Logs
 *.log
+
+# datasets & binaries - khong dua len repo
+*.pcap
+*.pcapng
+*.binetflow*
+*.biargus*
+*.bz2
+*.zip
+*.exe
+AssembledFiles/
