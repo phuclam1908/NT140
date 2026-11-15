@@ -3,7 +3,7 @@
 .env.*
 !.env.example
 
-# Dataset raw (dùng external storage)
+# Dataset raw (dung external storage)
 data/raw/**/*.pcap
 data/raw/**/*.pcapng
 data/raw/**/*.binetflow
@@ -37,18 +37,17 @@ Thumbs.db
 # Logs
 *.log
 
-# NT140 - Local datasets and generated analysis outputs
-.venv/
-__pycache__/
-*.pyc
-.env
-
-# Network captures and labeled flows
+# datasets & binaries - khong dua len repo
 *.pcap
 *.pcapng
-*.binetflow
+*.binetflow*
+*.biargus*
+*.bz2
+*.zip
+*.exe
+AssembledFiles/
+
+# NT140 - generated outputs
 data/raw/
 data/processed/
-
-# Generated analysis outputs
 reports/**/generated/
