@@ -1,0 +1,48 @@
+{
+  "pcap": "botnet-capture-20110810-neris.pcap",
+  "sha256": "b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36",
+  "packets": 323154,
+  "first_utc": "2011-08-10T09:01:40.475792Z",
+  "last_utc": "2011-08-10T13:49:29.289628Z",
+  "tcp_streams": 12859,
+  "udp_streams": 2758,
+  "tcp_states": {
+    "EST_FIN": 1080,
+    "EST_OPEN": 7,
+    "EST_RST": 684,
+    "PARTIAL": 21,
+    "REJ": 818,
+    "S0": 10245,
+    "SYN_ACK_NO_ACK": 4
+  },
+  "dup_suspect_packets": {
+    "TCP": 81378,
+    "UDP": 16364
+  },
+  "dns": {
+    "nxdomain_queries": 330,
+    "nxdomain_responses_raw": 330,
+    "orphan_responses": 4,
+    "queries_answered": 26142,
+    "queries_capture_dup": 15759,
+    "queries_no_response": 16527,
+    "queries_raw": 58428,
+    "queries_retransmission": 13469,
+    "queries_unique": 42669,
+    "responses_raw": 26146
+  },
+  "http_requests": 1393,
+  "http_requests_from_infected": 1383,
+  "http_requests_by_detection": {
+    "dissector": 1361,
+    "payload_heuristic": 32
+  },
+  "http_payload_heuristic_by_label_port": {
+    "IRC/6667": 31,
+    "KRB5/88": 1
+  },
+  "smtp_request_rows": 517,
+  "smtp_response_rows": 824,
+  "irc_rows": 61,
+  "warnings": []
+}

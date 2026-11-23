@@ -1,0 +1,42 @@
+metric,script_value,independent_value,match,independent_source,note
+packets,323154,323154,yes,capinfos -c -M,
+first_packet_utc,2011-08-10T09:01:40.475792Z,2011-08-10T09:01:40.475792Z,yes,capinfos -a (TZ=UTC),
+last_packet_utc,2011-08-10T13:49:29.289628Z,2011-08-10T13:49:29.289628Z,yes,capinfos -e (TZ=UTC),
+duration_s,17268.813836,17268.813836,yes,capinfos -u,
+tcp_streams,12859,12859,yes,tshark -T fields -e tcp.stream | sort -u,
+udp_streams,2758,2758,yes,tshark -T fields -e udp.stream | sort -u,
+protocol_hierarchy_lines_identical,44,44,yes,"tshark -qz io,phs",
+conv_ip_frames[213.246.53.125],52584,52584,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=5
+conv_ip_frames[184.154.132.106],46684,46684,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=3
+conv_ip_frames[212.117.171.138],24569,24569,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=321
+conv_ip_frames[147.32.80.9],22291,22291,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=6
+conv_ip_frames[174.133.57.141],5945,5945,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=358
+conv_ip_frames[209.85.225.27],5790,5790,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=965
+conv_ip_frames[173.192.170.88],5601,5601,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=286
+conv_ip_frames[212.117.174.7],5412,5412,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=902
+conv_ip_frames[65.55.196.251],4759,4759,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=26
+conv_ip_frames[78.129.163.119],4510,4510,yes,"tshark -qz conv,ip (Frames tổng 2 chiều)",top_destinations streams=2
+dns_query_packets (non-ICMP),58428,58428,yes,tshark -Y dns.flags.response==0 trừ bản trong ICMP,"tổng kể cả ICMP-quoted=58949, trong ICMP=521"
+dns_response_packets (non-ICMP),26146,26146,yes,tshark -Y dns.flags.response==1 trừ ICMP,tổng kể cả ICMP-quoted=26148
+dns_nxdomain_responses,330,330,yes,tshark -Y dns.flags.rcode==3,
+dns_unique_queries = queries_raw - capture_dup,42669,42669,yes,phép trừ từ bộ đếm thô,
+dns_findings sum(query_count),42669,42669,yes,dns_queries_full.csv.gz rows,
+dns_query_retrans_flag (tshark) = capture_dup + real_retrans,29228,29228,yes,tshark -Y dns.retransmission,tshark gắn cờ cả bản sao do capture lẫn gửi lại thật
+"http_requests (decode-as 6667,88)",1393,1393,yes,"tshark -d tcp.port==6667,http -d tcp.port==88,http -Y http.request",mặc định không decode-as: 1361
+http_requests detection=dissector,1361,1361,yes,tshark -Y http.request (không decode-as),
+http_requests detection=payload_heuristic (port 6667+88),32,32,yes,(decode-as) − (mặc định) trên tcp.port 6667/88,1361 dissector + 32 payload_heuristic = 1393
+smtp_command_packets,517,517,yes,tshark -Y smtp.req.command,smtp.req (kể cả dòng AUTH base64 không ghi ra)=643
+smtp_235,53,53,yes,tshark -Y smtp.response.code==235,
+smtp_535,10,10,yes,tshark -Y smtp.response.code==535,
+irc_packets,61,61,yes,tshark -Y irc,
+irc_commands NICK/USER/JOIN/PRIVMSG,0,0,yes,tshark -Y tcp.payload contains ...,
+sha256 pcap (tính lại),b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36,b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36,yes,sha256 trực tiếp file PCAP,
+sha256 datasets/dataset_manifest.csv,b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36,b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36,yes,so với hash tính lại,
+sha256 reports/week1/lam/dataset_manifest.csv,b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36,b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36,yes,so với hash tính lại,
+packet_count reports/week1/lam/dataset_manifest.csv,323154,323154,yes,so với capinfos,
+sha256 evidence/findings/FND-001.md,b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36,b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36,yes,so với hash tính lại,
+dup_packets_<1ms (TCP+UDP),97742,97768,no,đếm độc lập theo ip.id+src+dst+proto+len+checksum (mọi giao thức IP),"1ms-2s=22023, >=2s=8046 (>=2s nhiều khả năng là ip.id lặp lại tự nhiên)"
+streams 209.85.225.27:25,965,965,yes,tshark tcp.stream distinct,
+zeek-like conns 209.85.225.27:25 (tách khi gói > start+5s),1930,1930,yes,Zeek conn.log của Quý (FND-002/003),khớp => mỗi stream = 2 Zeek conn
+streams 212.117.174.7:4506,902,902,yes,tshark tcp.stream distinct,
+zeek-like conns 212.117.174.7:4506 (tách khi gói > start+5s),1804,1804,yes,Zeek conn.log của Quý (FND-002/003),khớp => mỗi stream = 2 Zeek conn

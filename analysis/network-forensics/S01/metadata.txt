@@ -1,21 +1,30 @@
 PCAP: botnet-capture-20110810-neris.pcap
 SHA-256: b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36
+Size (bytes): 58266506
+Packets (tshark frames): 323154
+First packet (UTC): 2011-08-10T09:01:40.475792Z
+Last packet (UTC):  2011-08-10T13:49:29.289628Z
+Duration (s): 17268.813836
+TShark: TShark (Wireshark) 4.6.9 (v4.6.9-0-g2d548b197c75).
+Capinfos: Capinfos (Wireshark) 4.6.9 (v4.6.9-0-g2d548b197c75).
+Warnings: none
 
-File name:           datasets\scenario-01-neris\pcap\botnet-capture-20110810-neris.pcap
-File type:           Wireshark/tcpdump/... - pcap
-File encapsulation:  Ethernet
+# capinfos -M (chạy với TZ=UTC, các mốc thời gian bên dưới là UTC)
+File name:           botnet-capture-20110810-neris.pcap
+File type:           pcap
+File encapsulation:  ether
 File timestamp precision:  microseconds (6)
 Packet size limit:   file hdr: 65535 bytes
-Number of packets:   323 k
-File size:           58 MB
-Data size:           53 MB
+Number of packets:   323154
+File size:           58266506 bytes
+Data size:           53096018 bytes
 Capture duration:    17268.813836 seconds
-Earliest packet time: 2011-08-10 16:01:40.475792
-Latest packet time:   2011-08-10 20:49:29.289628
-Data byte rate:      3074 bytes/s
-Data bit rate:       24 kbps
+Earliest packet time: 2011-08-10 09:01:40.475792
+Latest packet time:   2011-08-10 13:49:29.289628
+Data byte rate:      3074.68 bytes/sec
+Data bit rate:       24597.41 bits/sec
 Average packet size: 164.31 bytes
-Average packet rate: 18 packets/s
+Average packet rate: 18.71 packets/sec
 SHA256:              b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36
 SHA1:                5b822dc38f8b97f0b966bce4601cf73cb40afbd1
 Strict time order:   False
