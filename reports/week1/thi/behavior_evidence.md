@@ -15,23 +15,14 @@
 ## 1. Thông tin bộ dữ liệu
 
 | Thuộc tính | Giá trị |
-
 |---|---|
-
 | Scenario | CTU-13 Scenario 1 – Neris |
-
 | Dung lượng PCAP | Khoảng 58 MB |
-
 | Tổng số packet | 323.154 |
-
 | Ngày capture | 10/08/2011 |
-
 | Thời gian capture | 04:47:48 |
-
 | Định dạng đóng gói | Ethernet |
-
 | Máy nhiễm botnet | `147.32.84.165` |
-
 | SHA-256 | `b89cd5931f62d87ceff266568c97c6e36e56dd0330813cacadbc14a6c5576a36` |
 
 IP máy nhiễm `147.32.84.165` được xác định dựa trên metadata của CTU-13 Scenario 1.
@@ -43,19 +34,12 @@ Thời gian hiển thị trong Wireshark có thể phụ thuộc vào múi giờ
 Sử dụng `Statistics → Protocol Hierarchy` trong Wireshark để khảo sát các giao thức xuất hiện trong PCAP.
 
 | Giao thức | Số packet | Tỷ lệ |
-
 |---|---:|---:|
-
 | TCP | 235.622 | 72,9% |
-
 | UDP | 85.865 | 26,6% |
-
 | DNS | 84.574 | 26,2% |
-
 | HTTP | 2.676 | 0,8% |
-
 | IRC (Wireshark phân loại theo port 6667) | 61 | Dưới 0,1% |
-
 | TLS | 1.567 | 0,5% |
 
 TCP chiếm phần lớn lưu lượng mạng, trong khi DNS cũng xuất hiện với tỷ lệ đáng kể.
@@ -65,6 +49,7 @@ Wireshark ban đầu phân loại 61 packet là IRC. Tuy nhiên, sau khi đối 
 Cụ thể, đã ghi nhận 31 HTTP POST tới 17 địa chỉ IP trên port 6667, sử dụng header `CB2: 1`. Một số response trả về thông tin endpoint dưới dạng `CB2=IP:Port`.
 
 Vì vậy, nhóm không sử dụng 61 packet được Wireshark gán nhãn IRC làm bằng chứng xác nhận kênh IRC C2. Các kết luận về vai trò C2 của kênh HTTP này vẫn cần được phân biệt với những gì quan sát trực tiếp từ payload.
+
 ### 1.2. Ảnh khảo sát tổng quan
 
 ![Thông tin file PCAP và mã băm](../../../evidence/thi/overview/capture_properties.png)
@@ -108,23 +93,14 @@ Máy chủ phản hồi HTTP `200 OK`, trong phần nội dung có chuỗi:
 Thông tin packet:
 
 | Thuộc tính | Giá trị |
-
 |---|---|
-
 | Frame HTTP response | 2297 |
-
 | TCP stream | 88 |
-
 | IP nguồn | `200.171.4.222` |
-
 | Port nguồn | 6667 |
-
 | IP đích | `147.32.84.165` |
-
 | Port đích | 1288 |
-
 | HTTP status | 200 OK |
-
 | Nội dung response | `CB2=212.117.171.138:65500` |
 
 Sau khi nhận HTTP response, máy nhiễm tiếp tục khởi tạo một kết nối TCP đến chính endpoint được cung cấp.
@@ -136,17 +112,11 @@ Sử dụng Wireshark Display Filter:
 Kết quả quan sát:
 
 | Frame | Thời gian tương đối (giây) | Sự kiện |
-
 |---|---:|---|
-
 | 2297 | 462,564911 | Nhận HTTP response chứa endpoint |
-
 | 2303 | 462,610762 | Máy nhiễm gửi TCP SYN đến `212.117.171.138:65500` |
-
 | 2305 | 462,633239 | Server phản hồi SYN, ACK |
-
 | 2306 | 462,633544 | Máy nhiễm gửi ACK, hoàn thành TCP three-way handshake |
-
 | 3204 | 548,015184 | Server gửi dữ liệu TCP về máy nhiễm |
 
 Khoảng cách giữa HTTP response tại frame 2297 và TCP SYN tại frame 2303 là khoảng **45,85 ms**.
@@ -231,21 +201,13 @@ Payload có cấu trúc phù hợp với SOCKS5 theo RFC 1928:
 Tiếp tục kiểm tra TCP stream 141, ghi nhận máy nhiễm thiết lập kết nối từ `147.32.84.165:1337` tới `64.12.175.136:587`.
 
 | Frame | Sự kiện quan sát |
-
 |---|---|
-
 | 3216 | TCP stream 89 chứa yêu cầu SOCKS5 CONNECT tới `smtp.aol.com:587`. |
-
 | 3222 | Máy nhiễm gửi TCP SYN tới `64.12.175.136:587`. |
-
 | 3224 | Máy chủ SMTP phản hồi SYN/ACK. |
-
 | 3225 | Máy nhiễm gửi ACK, hoàn thành TCP handshake. |
-
 | 3237 | Máy chủ SMTP gửi banner `220`. |
-
 | 3242 | Máy nhiễm gửi lệnh `EHLO`. |
-
 | 3277 | Máy chủ SMTP trả `535 authentication failed`. |
 
 Trong cửa sổ Follow TCP Stream 89 cũng quan sát được các chuỗi SMTP được chuyển tiếp, bao gồm `220`, `EHLO` và `250`.
@@ -291,29 +253,17 @@ Trong PCAP, máy nhiễm `147.32.84.165` gửi các HTTP GET request đến nh�
 Một phiên tiêu biểu:
 
 | Thuộc tính | Giá trị |
-
 |---|---|
-
 | Request frame | 4491 |
-
 | Response frame | 4495 |
-
 | TCP stream | 208 |
-
 | IP nguồn | `147.32.84.165` |
-
 | Port nguồn | 1391 |
-
 | IP đích | `60.190.223.75` |
-
 | Port đích | 888 |
-
 | HTTP Host | `w.nucleardiscover.com:888` |
-
 | HTTP method | GET |
-
 | URI path | `/sn.php` |
-
 | HTTP status | 200 OK |
 
 HTTP GET chứa tham số `c` có giá trị là một chuỗi ký tự dài, chủ yếu có dạng hexadecimal.
@@ -382,36 +332,24 @@ Tuy nhiên, chưa xác định được nội dung thực tế của tham số `
 
 **Nhóm hành vi:** Nghi vấn Malware Download  
 
-**Trạng thái:** Đang điều tra
+**Trạng thái:** Completed – Network Evidence Analysis
 
 ### 4.1. Quan sát (Observation)
 
 Trong quá trình phân tích các HTTP request từ máy nhiễm, phát hiện request truy cập một tài nguyên có phần mở rộng `.exe`.
 
 | Thuộc tính | Giá trị |
-
 |---|---|
-
 | Request frame | 718 |
-
 | TCP stream | 13 |
-
 | IP nguồn | `147.32.84.165` |
-
 | IP đích | `195.88.191.59` |
-
 | HTTP Host | `nocomcom.com` |
-
 | Request URI | `/temp/3425.exe?t=0.3419458` |
-
 | HTTP method | GET |
-
 | HTTP response | 200 OK |
-
 | Server | nginx |
-
 | Content-Type | `application/octet-stream` |
-
 | Content-Length | 28.160 bytes |
 
 Khi sử dụng chức năng Follow HTTP Stream, quan sát được phần nội dung phản hồi bắt đầu bằng chữ ký:
@@ -427,13 +365,9 @@ Ngoài ra, phần dữ liệu còn chứa chuỗi:
 Ngoài request trên, còn quan sát được một số request đến những tài nguyên khác có phần mở rộng `.exe`:
 
 | Frame | Destination | URI |
-
 |---|---|---|
-
 | 1744 | `195.88.191.59` | `/bl/client.exe` |
-
 | 2024 | `195.88.191.59` | `/sv/fjuivgfhurew.exe` |
-
 
 ### 4.1.1. Ảnh bằng chứng EVD-004 – Response chứa dữ liệu kiểu PE
 
@@ -444,6 +378,7 @@ Ngoài request trên, còn quan sát được một số request đến những 
 ![Dữ liệu PE trong HTTP response của stream 13](../../../evidence/thi/fnd003/fnd003_pe_response_stream13.png)
 
 **Hình 12. TCP stream 13: response `200 OK`, `Content-Length: 28160`, dữ liệu có tiền tố `MZ`.**
+
 ### 4.1.2. Kiểm chứng bổ sung các HTTP response chứa PE-like content
 
 Sau khi đối chiếu các HTTP transactions trong CTU-13 Scenario 1 bằng Wireshark, đã kiểm chứng thêm hai HTTP response của các request `.exe` còn lại.
@@ -461,13 +396,14 @@ Các HTTP request đều liên quan máy nhiễm `147.32.84.165` và máy chủ 
 Những bằng chứng này xác nhận máy nhiễm đã nhận các HTTP response chứa dữ liệu có cấu trúc PE-like. Kết quả không tự chứng minh các file đã được lưu vào ổ đĩa, thực thi thành công hoặc chắc chắn là mã độc.
 
 **Trạng thái FND-003:** Completed – Network Evidence Analysis; việc xác định chức năng và mức độ độc hại của file nằm ngoài phạm vi bằng chứng mạng hiện tại.
+
 ![PE response frame 1918](../../../evidence/thi/fnd003/fnd003_pe_response_frame1918.png)
 
-*Hình 13. Frame 1918: HTTP 200 OK, File Data 93.696 bytes, chữ ký MZ.*
+**Hình 13. Frame 1918: HTTP 200 OK, File Data 93.696 bytes, chữ ký MZ.**
 
 ![PE response frame 2241](../../../evidence/thi/fnd003/fnd003_pe_response_frame2241.png)
 
-*Hình 14. Frame 2241: HTTP 200 OK, File Data 93.184 bytes, chữ ký MZ.*
+**Hình 14. Frame 2241: HTTP 200 OK, File Data 93.184 bytes, chữ ký MZ.**
 
 ### 4.2. Nhận định (Interpretation)
 
@@ -489,9 +425,9 @@ HTTP response của request `/temp/3425.exe` chứa nội dung có đặc điể
 
 ### 4.4. Hướng điều tra tiếp theo
 
-- Kiểm tra tính đầy đủ của HTTP response, đối chiếu với Content-Length.
+- ~~Kiểm tra tính đầy đủ của HTTP response, đối chiếu với Content-Length.~~ (Hoàn thành – xem 4.1.2)
 
-- Phân tích response metadata của những request `.exe` khác.
+- ~~Phân tích response metadata của những request `.exe` khác.~~ (Hoàn thành – frames 1918, 2241 đã kiểm chứng)
 
 - Kiểm tra các kết nối mạng xuất hiện sau thời điểm truyền file.
 
@@ -504,13 +440,9 @@ HTTP response của request `/temp/3425.exe` chứa nội dung có đặc điể
 ## 5. Tổng hợp bằng chứng
 
 | Finding | Evidence | Hành vi quan sát | Trạng thái |
-
 |---|---|---|---|
-
 | FND-001 | EVD-001, EVD-002; tham chiếu EVD-007 (Thương) | CB2 cung cấp endpoint → SOCKS5 CONNECT → SMTP relay | Đã kiểm chứng packet-level; C2 inferred |
-
 | FND-002 | EVD-003 | HTTP GET có tham số dài và nhiều request tương tự | Phân tích sơ bộ |
-
 | FND-003 | EVD-004 | HTTP response chứa nội dung phù hợp với file PE | Completed – Network Evidence Analysis |
 
 Ba finding phản ánh các quan sát có bằng chứng packet-level ở những mức độ khác nhau. FND-001 đã được bổ sung phân tích SOCKS5/SMTP; chưa thể từ đó suy ra toàn bộ chức năng C2 hoặc việc gửi email thành công. FND-002 và FND-003 vẫn cần các bước xác minh còn lại.
